@@ -4,6 +4,7 @@ source $(poetry env info --path)/bin/activate
 # source ~/.zshrc
 #source venv/bin/activate
 
+# pipx install poetry (indepent of py version)
 # poetry init
 # poetry env use python3.12
 # source $(poetry env info --path)/bin/activate
