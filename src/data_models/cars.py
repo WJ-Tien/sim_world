@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 class Car(BaseModel):
     name: str = Field(...)
     color: tuple[int, int, int] = Field(..., description="RGB color")
-    grid_pos: list[int] = Field(default_factory=lambda: [0, 0])
+    grid_pos: list[int] = Field(default_factory=lambda: [0, 0]) # x, y (cols, rows)
 
     def move(self, grid_cols: int, grid_rows: int, blocks: set[tuple[int, int]]) -> None:
         direction = random.choice(list(Directions))

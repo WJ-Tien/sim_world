@@ -33,8 +33,8 @@ class World:
 
     def gen_road_block(self) -> None:
         """Generate a random block network."""
-        for y in range(self.world_config.grid_rows):
-            for x in range(self.world_config.grid_cols):
+        for x in range(self.world_config.grid_cols):
+            for y in range(self.world_config.grid_rows):
                 if random.random() > (1 - self.world_config.block_ratio):  # 1 - self.block_ratio% chance of being a road
                     self.road_blocks.add((x, y))
 
@@ -46,7 +46,7 @@ class World:
 
     def draw_blocks(self) -> None:
         for x, y in self.road_blocks:
-            self.screen.blit(self.block_image, (y * self.world_config.cell_size, x * self.world_config.cell_size))
+            self.screen.blit(self.block_image, (x * self.world_config.cell_size, y * self.world_config.cell_size))
 
     def init_world(self) -> None:
         pygame.display.set_caption("Simulation World")
@@ -59,7 +59,7 @@ class World:
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == move_event:
-                    self.car_manager.update_cars(self.world_config.grid_cols, self.world_config.grid_rows, self.road_blocks)
+                    self.car_manager.update_cars(self.road_blocks)
 
             self.screen.fill(self.world_config.map_background_color)
             self.draw_roads()

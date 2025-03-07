@@ -6,16 +6,18 @@ from .. configs.file_path import CAR_FIG
 class CarManager:
     def __init__(self) -> None:
         self.cars: list[Car] = []
-        self.car_image = pygame.image.load(CAR_FIG)
         self.cell_size = WorldConfig.get_cell_size()
+        self.car_image = pygame.image.load(CAR_FIG)
         self.car_image = pygame.transform.scale(self.car_image, (self.cell_size, self.cell_size))
+        self.grid_rows = WorldConfig.get_grid_rows()
+        self.grid_cols = WorldConfig.get_grid_cols()
 
     def add_car(self, car: Car) -> None:
         self.cars.append(car)
 
-    def update_cars(self, grid_cols: int, grid_rows: int, blocks: set[tuple[int, int]]) -> None:
+    def update_cars(self, blocks: set[tuple[int, int]]) -> None:
         for car in self.cars:
-            car.move(grid_cols, grid_rows, blocks)
+            car.move(self.grid_cols, self.grid_rows, blocks)
 
     def draw_cars(self, screen: pygame.Surface) -> None:
         for car in self.cars:
