@@ -1,0 +1,18 @@
+from data_models.cars import Car
+from maps.world import World
+from registers.car_manager import CarManager
+from data_models.base_world import WorldConfig
+
+if __name__ == "__main__":
+
+    world_config = WorldConfig()
+
+    car_manager = CarManager()
+    car1 = Car(name="test_vehicle_1", color=(255, 0, 0), grid_pos=[0, 0])
+    car2 = Car(name="test_vehicle_2", color=(0, 255, 0), grid_pos=[3, 3])
+    car_manager.add_car(car1)
+    car_manager.add_car(car2)
+
+    my_world = World(world_config, car_manager)
+    my_world.init_world()
+    

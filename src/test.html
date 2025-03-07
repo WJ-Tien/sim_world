@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_eb538e493293d3c924e0d9e632ed4c93 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<script>
+// 建立自訂圖示
+var carIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/744/744465.png',
+    iconSize: [40, 40]
+});
+
+// 定義起點與終點
+var start = [25.033, 121.5654];
+var end = [25.028, 121.57];
+
+// 在地圖上建立 marker，加入車子圖示
+var marker = L.marker(start, {icon: carIcon}).addTo(map_eb538e493293d3c924e0d9e632ed4c93);
+
+// 設定移動參數：總共 steps 趟，步數越多移動越平滑
+var steps = 100;
+var currentStep = 0;
+
+// 每 100 毫秒更新一次 marker 位置，線性插值計算新位置
+function moveMarker() {
+    if (currentStep > steps) {
+        clearInterval(timer);
+        return;
+    }
+    var lat = start[0] + (end[0] - start[0]) * (currentStep / steps);
+    var lng = start[1] + (end[1] - start[1]) * (currentStep / steps);
+    marker.setLatLng([lat, lng]);
+    currentStep++;
+}
+
+// 設定定時器，每 100 毫秒呼叫一次 moveMarker
+var timer = setInterval(moveMarker, 100);
+</script>
+    
+            <div class="folium-map" id="map_eb538e493293d3c924e0d9e632ed4c93" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_eb538e493293d3c924e0d9e632ed4c93 = L.map(
+                "map_eb538e493293d3c924e0d9e632ed4c93",
+                {
+                    center: [25.033, 121.5654],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_7f73ab1f98b2a6f685fe5e5f519fa97d = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_7f73ab1f98b2a6f685fe5e5f519fa97d.addTo(map_eb538e493293d3c924e0d9e632ed4c93);
+        
+    
+            var poly_line_48ce0a7d6db398e7f0646c211e308394 = L.polyline(
+                [[25.033, 121.5654], [25.028, 121.57]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_eb538e493293d3c924e0d9e632ed4c93);
+        
+</script>
+</html>

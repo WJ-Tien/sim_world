@@ -1,0 +1,19 @@
+import pygame
+from data_models.cars import Car
+
+class CarManager:
+    def __init__(self):
+        self.cars: list[Car] = []
+
+    def add_car(self, car: Car):
+        self.cars.append(car)
+
+    def update_cars(self, grid_cols: int, grid_rows: int):
+        for car in self.cars:
+            car.move(grid_cols, grid_rows)
+
+    def draw_cars(self, screen: pygame.Surface, cell_size: int):
+        for car in self.cars:
+            car_pixel_x = car.grid_pos[0] * cell_size
+            car_pixel_y = car.grid_pos[1] * cell_size
+            pygame.draw.rect(screen, car.color, (car_pixel_x, car_pixel_y, cell_size, cell_size))
