@@ -1,5 +1,5 @@
 import random
-from . directions import Directions
+from src.data_models.directions import Directions
 from pydantic import BaseModel, Field
 
 

@@ -1,5 +1,5 @@
 import pygame
-from data_models.cars import Car
+from src.data_models.cars import Car
 
 class CarManager:
     def __init__(self) -> None:

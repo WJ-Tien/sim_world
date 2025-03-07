@@ -1,7 +1,7 @@
-from data_models.cars import Car
-from maps.world import World
-from registers.car_manager import CarManager
-from data_models.base_world import WorldConfig
+from src.data_models.cars import Car
+from src.maps.world import World
+from src.registers.car_manager import CarManager
+from src.data_models.base_world import WorldConfig
 
 if __name__ == "__main__":
 
