@@ -10,18 +10,24 @@ class World:
         pygame.init()
         self.world_config = world_config
         self.cell_size = self.world_config.cell_size
-        self.width = self.world_config.grid_cols * self.world_config.cell_size
-        self.height = self.world_config.grid_rows * self.world_config.cell_size
+        self.width = self.world_config.grid_cols * self.cell_size
+        self.height = self.world_config.grid_rows * self.cell_size
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.clock = pygame.time.Clock()
         self.car_manager = car_manager
+        self.blocks = {(3, 3), (4, 4), (5, 5), (6, 5), (7, 5), (23, 23), (20,20), (11,15), (7,7), (24, 15)}
 
     def draw_grid(self) -> None:
         for x in range(0, self.width, self.cell_size):
             pygame.draw.line(self.screen, self.world_config.grid_line_color, (x, 0), (x, self.height))
         for y in range(0, self.height, self.cell_size):
             pygame.draw.line(self.screen, self.world_config.grid_line_color, (0, y), (self.width, y))
-    
+
+    def draw_blocks(self) -> None:
+        for block in self.blocks:
+            rect = pygame.Rect(block[0] * self.cell_size, block[1] * self.cell_size, self.cell_size, self.cell_size)
+            pygame.draw.rect(self.screen, self.world_config.block_color, rect)
+
     def init_world(self) -> None:
         pygame.display.set_caption("Simulation World")
         move_event = pygame.USEREVENT + 1
@@ -33,11 +39,12 @@ class World:
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == move_event:
-                    self.car_manager.update_cars(self.world_config.grid_cols, self.world_config.grid_rows)
+                    self.car_manager.update_cars(self.world_config.grid_cols, self.world_config.grid_rows, self.blocks)
 
             self.screen.fill(self.world_config.map_background_color)
             self.draw_grid()
-            self.car_manager.draw_cars(self.screen, self.world_config.cell_size)
+            self.draw_blocks()
+            self.car_manager.draw_cars(self.screen, self.cell_size)
 
             pygame.display.flip()
             self.clock.tick(self.world_config.fps)

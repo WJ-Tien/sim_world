@@ -8,9 +8,9 @@ class CarManager:
     def add_car(self, car: Car) -> None:
         self.cars.append(car)
 
-    def update_cars(self, grid_cols: int, grid_rows: int) -> None:
+    def update_cars(self, grid_cols: int, grid_rows: int, blocks: set[tuple[int, int]]) -> None:
         for car in self.cars:
-            car.move(grid_cols, grid_rows)
+            car.move(grid_cols, grid_rows, blocks)
 
     def draw_cars(self, screen: pygame.Surface, cell_size: int) -> None:
         for car in self.cars:
