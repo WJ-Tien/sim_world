@@ -1,7 +1,7 @@
 import pygame
 import sys
-from src.data_models.base_world import WorldConfig
-from src.registers.car_manager import CarManager
+from .. data_models.base_world import WorldConfig
+from .. registers.car_manager import CarManager
 
 
 class World:
