@@ -8,6 +8,7 @@ if __name__ == "__main__":
     world_config = WorldConfig()
 
     car_manager = CarManager()
+    # TODO register cars in db 
     car1 = Car(name="test_vehicle_1", color=(255, 0, 0), grid_pos=[0, 0])
     car2 = Car(name="test_vehicle_2", color=(0, 255, 0), grid_pos=[15, 15])
     car3 = Car(name="test_vehicle_3", color=(0, 255, 255), grid_pos=[24, 24])

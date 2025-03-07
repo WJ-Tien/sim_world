@@ -9,3 +9,8 @@ class WorldConfig(BaseModel):
     map_background_color: tuple = (255, 255, 255)
     grid_line_color: tuple = (200, 200, 200)
     block_color: tuple = (100, 100, 100)
+    block_ratio: float = 0.1
+
+    @classmethod
+    def get_cell_size(cls):
+        return cls.model_fields["cell_size"].default
