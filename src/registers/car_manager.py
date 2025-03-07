@@ -2,17 +2,17 @@ import pygame
 from data_models.cars import Car
 
 class CarManager:
-    def __init__(self):
+    def __init__(self) -> None:
         self.cars: list[Car] = []
 
-    def add_car(self, car: Car):
+    def add_car(self, car: Car) -> None:
         self.cars.append(car)
 
-    def update_cars(self, grid_cols: int, grid_rows: int):
+    def update_cars(self, grid_cols: int, grid_rows: int) -> None:
         for car in self.cars:
             car.move(grid_cols, grid_rows)
 
-    def draw_cars(self, screen: pygame.Surface, cell_size: int):
+    def draw_cars(self, screen: pygame.Surface, cell_size: int) -> None:
         for car in self.cars:
             car_pixel_x = car.grid_pos[0] * cell_size
             car_pixel_y = car.grid_pos[1] * cell_size

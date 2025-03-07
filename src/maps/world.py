@@ -18,9 +18,9 @@ class World:
 
     def draw_grid(self) -> None:
         for x in range(0, self.width, self.cell_size):
-            pygame.draw.line(self.screen, (200, 200, 200), (x, 0), (x, self.height))
+            pygame.draw.line(self.screen, self.world_config.grid_line_color, (x, 0), (x, self.height))
         for y in range(0, self.height, self.cell_size):
-            pygame.draw.line(self.screen, (200, 200, 200), (0, y), (self.width, y))
+            pygame.draw.line(self.screen, self.world_config.grid_line_color, (0, y), (self.width, y))
     
     def init_world(self) -> None:
         pygame.display.set_caption("Simulation World")
@@ -35,12 +35,12 @@ class World:
                 elif event.type == move_event:
                     self.car_manager.update_cars(self.world_config.grid_cols, self.world_config.grid_rows)
 
-            self.screen.fill((255, 255, 255))
+            self.screen.fill(self.world_config.map_background_color)
             self.draw_grid()
             self.car_manager.draw_cars(self.screen, self.world_config.cell_size)
 
             pygame.display.flip()
-            self.clock.tick(60)
+            self.clock.tick(self.world_config.fps)
 
         pygame.quit()
         sys.exit()
