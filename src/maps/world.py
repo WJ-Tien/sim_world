@@ -13,10 +13,8 @@ class World:
 
         # map/road
         self.world_config = world_config
-        self.cell_size = self.world_config.cell_size
-        self.width = self.world_config.grid_cols * self.cell_size
-        self.height = self.world_config.grid_rows * self.cell_size
-        self.block_ratio = self.world_config.block_ratio
+        self.width = self.world_config.grid_cols * self.world_config.cell_size
+        self.height = self.world_config.grid_rows * self.world_config.cell_size
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.clock = pygame.time.Clock()
 
@@ -27,24 +25,28 @@ class World:
         self.road_blocks = set()
         self.gen_road_block()
         self.block_image = pygame.image.load(BLOCK_FIG)
-        self.block_image = pygame.transform.scale(self.block_image, (self.cell_size, self.cell_size))  # S
+        self.block_image = pygame.transform.scale(self.block_image, 
+                                                    (self.world_config.cell_size, 
+                                                     self.world_config.cell_size
+                                                     )
+                                                  )  # S
 
     def gen_road_block(self) -> None:
         """Generate a random block network."""
         for y in range(self.world_config.grid_rows):
             for x in range(self.world_config.grid_cols):
-                if random.random() > (1 - self.block_ratio):  # 1 - self.block_ratio% chance of being a road
+                if random.random() > (1 - self.world_config.block_ratio):  # 1 - self.block_ratio% chance of being a road
                     self.road_blocks.add((x, y))
 
     def draw_roads(self) -> None:
-        for x in range(0, self.width, self.cell_size):
+        for x in range(0, self.width, self.world_config.cell_size):
             pygame.draw.line(self.screen, self.world_config.grid_line_color, (x, 0), (x, self.height))
-        for y in range(0, self.height, self.cell_size):
+        for y in range(0, self.height, self.world_config.cell_size):
             pygame.draw.line(self.screen, self.world_config.grid_line_color, (0, y), (self.width, y))
 
     def draw_blocks(self) -> None:
         for x, y in self.road_blocks:
-            self.screen.blit(self.block_image, (y * self.cell_size, x * self.cell_size))
+            self.screen.blit(self.block_image, (y * self.world_config.cell_size, x * self.world_config.cell_size))
 
     def init_world(self) -> None:
         pygame.display.set_caption("Simulation World")
